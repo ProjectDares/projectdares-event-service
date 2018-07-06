@@ -19,9 +19,20 @@ public class EventService {
     }
 
     public Event joinEvent(String userId, String eventId) {
-        Event event = eventRepository.findById(eventId).orElseThrow(() -> new IllegalArgumentException("Wrong event id"));
+        Event event = getEventById(eventId);
         User user = new User(userId);
         event.addParticipant(user);
         return eventRepository.save(event);
+    }
+
+    public Event leaveEvent(String userId, String eventId) {
+        Event event = getEventById(eventId);
+        User user = new User(userId);
+        event.removeParticipant(user);
+        return eventRepository.save(event);
+    }
+
+    private Event getEventById(String eventId) {
+        return eventRepository.findById(eventId).orElseThrow(() -> new IllegalArgumentException("Wrong event id"));
     }
 }

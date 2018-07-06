@@ -26,4 +26,9 @@ public class EventController {
     public Event joinEvent(@PathVariable String eventId, String userId) {
         return eventService.joinEvent(userId, eventId);
     }
+
+    @PutMapping("/event/{eventId}/leave")
+    public Event leaveEvent(@PathVariable String eventId, String userId) {
+        return eventService.leaveEvent(userId, eventId);
+    }
 }

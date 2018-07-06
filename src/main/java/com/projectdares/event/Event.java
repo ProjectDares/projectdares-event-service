@@ -29,7 +29,7 @@ public class Event {
 
     private Instant created;
 
-    private Set<String> participantIds = new HashSet<>();
+    private Set<User> participants = new HashSet<>();
 
     public Event(String sport, LocalDateTime dateTime, int minParticipants, GeoJsonPoint location) {
         this(sport, dateTime, sport + ": " + location.toString() + ", " + dateTime.toString(), minParticipants, location);
@@ -45,6 +45,10 @@ public class Event {
     }
 
     public void addParticipant(User user) {
+        participants.add(user);
+    }
 
+    public void removeParticipant(User user) {
+        participants.remove(user);
     }
 }
