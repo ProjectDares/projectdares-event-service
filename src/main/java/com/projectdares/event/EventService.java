@@ -17,4 +17,11 @@ public class EventService {
     public List<Event> findAll() {
         return eventRepository.findAll();
     }
+
+    public Event joinEvent(String userId, String eventId) {
+        Event event = eventRepository.findById(eventId).orElseThrow(() -> new IllegalArgumentException("Wrong event id"));
+        User user = new User(userId);
+        event.addParticipant(user);
+        return eventRepository.save(event);
+    }
 }

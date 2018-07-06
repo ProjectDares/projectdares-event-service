@@ -2,6 +2,8 @@ package com.projectdares.event;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
@@ -27,6 +29,8 @@ public class Event {
 
     private Instant created;
 
+    private Set<String> participantIds = new HashSet<>();
+
     public Event(String sport, LocalDateTime dateTime, int minParticipants, GeoJsonPoint location) {
         this(sport, dateTime, sport + ": " + location.toString() + ", " + dateTime.toString(), minParticipants, location);
     }
@@ -38,5 +42,9 @@ public class Event {
         this.minParticipants = minParticipants;
         this.location = location;
         this.created = Instant.now();
+    }
+
+    public void addParticipant(User user) {
+
     }
 }
